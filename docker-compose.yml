@@ -1,0 +1,40 @@
+version: '3.7'
+
+services:
+    app:
+        build:
+            context: .
+            dockerfile: Dockerfile
+            target: builder
+        command: sh -c "npm run start:dev"
+        ports:
+            - '3000:3000'
+        volumes:
+            - .:/usr/app
+        environment:
+            NODE_ENV: dev
+            DB_HOST: db
+            DB_PORT: 5432
+            DB_USER: productservice
+            DB_PASSWORD: productservice
+            DB_NAME: productservice
+        container_name: productservice-app
+        depends_on:
+            - db
+    db:
+        image: postgres:13-alpine
+        environment:
+            POSTGRES_USER: productservice
+            POSTGRES_PASSWORD: productservice
+            POSTGRES_DB: productservice
+        container_name: productservice-db
+        # command: --init-file /data/application/init.sql
+        volumes:
+            - pgdata:/data/postgres
+            - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+        ports:
+            - 5432:5432
+
+volumes:
+    pgdata:
+        driver: local

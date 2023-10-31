@@ -17,12 +17,22 @@
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./test/jest-e2e.json"
+    "test:e2e": "jest --config ./test/jest-e2e.json",
+    "typeorm": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli -f ./src/ormconfig.ts",
+    "m:create": "npm run typeorm -- migration:create -n",
+    "m:generate": "npm run typeorm -- migration:generate -n",
+    "m:up": "npm run typeorm -- migration:run",
+    "m:down": "npm run typeorm -- migration:revert",
+    "m:run": "npm run typeorm migration:run",
+    "clean-database": "npm run typeorm schema:drop && npm run typeorm migration:run"
   },
   "dependencies": {
     "@nestjs/common": "^9.0.0",
+    "@nestjs/config": "^3.1.1",
     "@nestjs/core": "^9.0.0",
     "@nestjs/platform-express": "^9.0.0",
+    "@nestjs/typeorm": "^10.0.0",
+    "pg": "^8.11.3",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.2.0"
   },
