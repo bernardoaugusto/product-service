@@ -1,83 +1,73 @@
-import { ApiProperty } from '@nestjs/swagger';
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { ProductModel } from 'src/modules/Product/models/Product.model';
 import { BaseResponseDTO } from '../../../../../common/dtos/response/base.response.dto';
-import {
-  JudicialNatureType,
-  RegisterProcessEnum,
-} from '../../../interfaces/Product.interface';
 
 export class ProductResponseDTO extends BaseResponseDTO {
   @ApiProperty({
     type: 'uuid',
     example: 'fb5c9676-4e28-4daa-8efa-375512451f8f',
   })
-  readonly profile_id: string;
+  readonly id: string;
 
   @ApiProperty({
     type: 'string',
-    example: 'PERFIL FISCAL',
+    example: 'name',
   })
-  readonly profile_alias: string;
-
-  @ApiProperty({
-    type: 'uuid',
-    example: 'fb5c9676-4e28-4daa-8efa-375512451f8f',
-  })
-  readonly establishment_id: string;
+  readonly name: string;
 
   @ApiProperty({
     type: 'string',
-    example: 'Seidor Brasil',
+    example: '123456',
   })
-  readonly establishment_alias: string;
+  readonly code: string;
 
-  @ApiProperty({
-    type: 'string',
-    example: '123456789',
-  })
-  readonly fiscal_number: string;
-
-  @ApiProperty({
-    type: 'number',
-    example: 2,
-  })
-  readonly register_type: RegisterProcessEnum;
-
-  @ApiProperty({
-    type: 'string',
-    example: '123',
-  })
-  readonly process_number: string;
-
-  @ApiProperty({
-    type: 'string',
-    example: 'juridic session',
-  })
-  readonly juridic_session: string;
-
-  @ApiProperty({
-    type: 'string',
-    example: 'vara',
-  })
-  readonly vara: string;
-
-  @ApiProperty({
-    type: 'string',
-    example: '01',
-  })
-  readonly judicial_nature: JudicialNatureType;
-
-  @ApiProperty({
-    type: 'string',
+  @ApiPropertyOptional({
+    type: 'description',
     example: 'description',
   })
   readonly description: string;
 
-  @ApiProperty({
-    type: 'string',
-    example: 'description',
+  @ApiPropertyOptional({
+    type: 'number',
+    example: 1,
   })
-  readonly judicial_date: string;
+  readonly height: number;
+
+  @ApiPropertyOptional({
+    type: 'number',
+    example: 1,
+  })
+  readonly width: number;
+
+  @ApiPropertyOptional({
+    type: 'number',
+    example: 1,
+  })
+  readonly depth: number;
+
+  @ApiPropertyOptional({
+    type: 'number',
+    example: 1,
+  })
+  readonly volume: number;
+
+  @ApiPropertyOptional({
+    type: 'number',
+    example: 1,
+  })
+  readonly net_weight: number;
+
+  @ApiPropertyOptional({
+    type: 'number',
+    example: 1,
+  })
+  readonly gross_weight: number;
+
+  @ApiPropertyOptional({
+    type: 'string',
+    example: 'www.google.com',
+  })
+  readonly image_url: string;
 
   constructor(data: ProductModel) {
     super(data);

@@ -1,7 +1,7 @@
 import { BaseEntity } from '../../../common/models/BaseEntity.model';
 import { Column, Entity } from 'typeorm';
 
-@Entity('judicial_process')
+@Entity('product')
 export class ProductModel extends BaseEntity {
   @Column()
   name: string;
