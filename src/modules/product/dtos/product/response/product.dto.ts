@@ -1,12 +1,12 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { JudicialProcessModel } from 'src/modules/judicialProcess/models/judicialProcess.model';
+import { ProductModel } from 'src/modules/Product/models/Product.model';
 import { BaseResponseDTO } from '../../../../../common/dtos/response/base.response.dto';
 import {
   JudicialNatureType,
   RegisterProcessEnum,
-} from '../../../interfaces/judicialProcess.interface';
+} from '../../../interfaces/Product.interface';
 
-export class JudicialProcessResponseDTO extends BaseResponseDTO {
+export class ProductResponseDTO extends BaseResponseDTO {
   @ApiProperty({
     type: 'uuid',
     example: 'fb5c9676-4e28-4daa-8efa-375512451f8f',
@@ -79,7 +79,7 @@ export class JudicialProcessResponseDTO extends BaseResponseDTO {
   })
   readonly judicial_date: string;
 
-  constructor(data: JudicialProcessModel) {
+  constructor(data: ProductModel) {
     super(data);
     Object.assign(this, data);
   }

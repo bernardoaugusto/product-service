@@ -44,14 +44,20 @@ export class ProductService {
     return this.productRepository.getAllWithoutPagination(queryParams);
   }
 
-  //   public async update(
-  //     id: string,
-  //     data: UpdateProductDTO,
-  //   ): Promise<ProductModel> {
-  //     const foundProduct = await this.getById(id);
+  public async update(
+    id: string,
+    data: UpdateProductDTO,
+  ): Promise<ProductModel> {
+    const foundProduct = await this.getById(id);
 
-  //     const updates = Object.assign(foundProduct, data);
+    const updates = Object.assign(foundProduct, data);
 
-  //     return await this.productRepository.createAndSave(updates);
-  //   }
+    return await this.productRepository.createAndSave(updates);
+  }
+
+  public async delete(id: string): Promise<void> {
+    await this.getById(id);
+
+    return this.productRepository.deleteById(id);
+  }
 }

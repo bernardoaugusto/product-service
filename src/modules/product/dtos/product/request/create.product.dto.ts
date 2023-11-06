@@ -7,7 +7,7 @@ import {
   IsString,
 } from 'class-validator';
 
-export class CreateJudicialProcessDTO {
+export class CreateProductDTO {
   @ApiProperty({
     type: 'string',
     example: 'name',

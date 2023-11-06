@@ -16,7 +16,7 @@ const sortParams = [
   'image_urlCode',
 ];
 
-export class GetAllJudicialProcessRequestDTO extends BaseGetAllRequestDTO {
+export class GetAllProductRequestDTO extends BaseGetAllRequestDTO {
   @ApiPropertyOptional({
     type: 'string',
     example: 'name',

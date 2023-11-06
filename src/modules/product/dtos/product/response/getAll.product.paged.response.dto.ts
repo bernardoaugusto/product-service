@@ -1,14 +1,14 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { JudicialProcessModel } from '../../../models/judicialProcess.model';
+import { ProductModel } from '../../../models/Product.model';
 import { GetAllPagedResponseDTO } from '../../../../../common/dtos/response/getAll.paged.response.dto';
-import { JudicialProcessResponseDTO } from './product.dto';
+import { ProductResponseDTO } from './product.dto';
 
-export class GetAllJudicialProcessPagedResponseDTO extends GetAllPagedResponseDTO {
+export class GetAllProductPagedResponseDTO extends GetAllPagedResponseDTO {
   @ApiProperty({
-    description: 'JudicialProcess Data',
-    type: [JudicialProcessResponseDTO],
+    description: 'Product Data',
+    type: [ProductResponseDTO],
   })
-  readonly data: JudicialProcessModel[];
+  readonly data: ProductModel[];
 
   constructor(data: any) {
     super(data);
