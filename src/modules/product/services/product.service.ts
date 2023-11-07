@@ -5,19 +5,25 @@ import { ProductInterface } from '../interfaces/product.interface';
 import { GetAllPagedResponseInterface } from '../../../common/interfaces/responses.interface';
 import { GetAllProductRequestDTO } from '../dtos/product/request/getAll.product.request.dto';
 import { UpdateProductDTO } from '../dtos/product/request/update.product.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class ProductService {
-  constructor(private productRepository: ProductRepository) {}
+  constructor(
+    @InjectRepository(ProductModel)
+    private readonly productRepository: Repository<ProductModel>,
+  ) {}
 
   public async create(data: Partial<ProductInterface>): Promise<ProductModel> {
-    const product = await this.productRepository.createAndSave(data);
+    console.log(this.productRepository);
+    const product = await this.productRepository.save(data);
 
     return product;
   }
 
   public async getById(id: string): Promise<ProductModel> {
-    const product = await this.productRepository.getById(id);
+    const product = await this.productRepository.findOne({ where: { id } });
 
     if (!product) {
       throw new NotFoundException('Product not found');
@@ -31,8 +37,8 @@ export class ProductService {
     withPagination: boolean,
   ): Promise<ProductModel[] | GetAllPagedResponseInterface<ProductModel>> {
     if (withPagination) {
-      const { data, count } = await this.productRepository.getAllWithPagination(
-        queryParams,
+      const [data, count] = await this.productRepository.findAndCount(
+        <any>queryParams,
       );
 
       return {
@@ -41,7 +47,7 @@ export class ProductService {
       };
     }
 
-    return this.productRepository.getAllWithoutPagination(queryParams);
+    return this.productRepository.find(<any>queryParams);
   }
 
   public async update(
@@ -52,12 +58,12 @@ export class ProductService {
 
     const updates = Object.assign(foundProduct, data);
 
-    return await this.productRepository.createAndSave(updates);
+    return await this.productRepository.save(updates);
   }
 
   public async delete(id: string): Promise<void> {
     await this.getById(id);
 
-    return this.productRepository.deleteById(id);
+    await this.productRepository.delete(id);
   }
 }

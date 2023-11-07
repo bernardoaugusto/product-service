@@ -1,5 +1,5 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import { ProductModel } from 'src/modules/Product/models/Product.model';
+import { ProductModel } from '../../../models/product.model';
 import { BaseResponseDTO } from '../../../../../common/dtos/response/base.response.dto';
 
 export class ProductResponseDTO extends BaseResponseDTO {
